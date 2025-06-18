@@ -1,23 +1,22 @@
 provider "aws" {
   region = "us-east-1"
-
 }
 
-resource "aws_instance" "ec2_instance" {
-  ami           = "ami-0f88e80871fd81e91"
+resource "aws_instance" "docker_ec2" {
+  ami           = "ami-0f88e80871fd81e91" # Ensure this AMI is valid for us-east-1
   instance_type = "t2.micro"
-  tags = {
-    Name = "chitti_robo"
-  }
-}
 
   user_data = <<-EOF
               #!/bin/bash
-              sudo yum update -y
-              sudo amazon-linux-extras install docker -y
-              sudo service docker start
-              sudo usermod -aG docker ec2-user
-              sudo chkconfig docker on
+              yum update -y
+              amazon-linux-extras install docker -y
+              service docker start
+              usermod -aG docker ec2-user
+              chkconfig docker on
               echo "Docker installed and started."
             EOF
+
+  tags = {
+    Name = "chitti_robo"
+  }
 }
