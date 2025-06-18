@@ -11,10 +11,6 @@ resource "aws_instance" "ec2_instance" {
   }
 }
 
-resource "aws_instance" "docker_host" {
-  ami           = "ami-0f88e80871fd81e91" # Use the latest Amazon Linux 2 AMI
-  instance_type = "t2.micro"
-
   user_data = <<-EOF
               #!/bin/bash
               sudo yum update -y
@@ -24,8 +20,4 @@ resource "aws_instance" "docker_host" {
               sudo chkconfig docker on
               echo "Docker installed and started."
             EOF
-
-  tags = {
-    Name = "chitti_robo"
-  }
 }
