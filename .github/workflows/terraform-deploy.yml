@@ -1,4 +1,4 @@
-name: 🚀 Terraform EC2 Deployment with Docker
+name: Deploy EC2 with Terraform
 
 on:
   push:
